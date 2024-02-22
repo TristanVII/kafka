@@ -42,7 +42,7 @@ services:
       - my-db:/var/lib/mysql
 
   storage:
-    build: ./storage
+    build: ../api-project/storage
     network_mode: "host"
     ports:
       - "8090:8090"
@@ -51,14 +51,14 @@ services:
       - kafka
 
   receiver:
-    build: ./receiver
+    build: ../api-project/receiver
     ports: 
       - "8080:8080"
     depends_on:
       - kafka
   
   processing:
-    build: ./processing
+    build: ../api-project/processing
     network_mode: "host"
     ports:
       - "8100:8100"
@@ -66,7 +66,7 @@ services:
       - kafka
 
   audit:
-    build: ./audit
+    build: ../api-project/audit
     ports:
       - "8110:8110"
 
