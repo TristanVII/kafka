@@ -69,6 +69,11 @@ services:
     build: ../api-project/audit
     ports:
       - "8110:8110"
+  
+  dashboard:
+    build: ../api-project/dashboard
+    ports:
+      - "3000:80" #external:internal
 
 volumes:
   my-db:
