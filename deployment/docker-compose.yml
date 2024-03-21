@@ -60,7 +60,8 @@ services:
     ports: 
       - "8080:8080"
     depends_on:
-      - kafka
+      - "kafka"
+      - "zookeeper"
   
   processing:
     build: ../api-project/processing
