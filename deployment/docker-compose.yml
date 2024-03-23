@@ -29,7 +29,7 @@ services:
       - docker_sock_db:/var/run/docker.sock
       - kafka_db:/kafka/kafka-logs
     depends_on:
-      - "zookeeper"
+      - zookeeper
 
   db:
     image: mysql:5.7
@@ -60,8 +60,8 @@ services:
     ports: 
       - "8080:8080"
     depends_on:
-      - "kafka"
-      - "zookeeper"
+      - kafka
+      - zookeeper
   
   processing:
     build: ../api-project/processing
@@ -88,3 +88,4 @@ volumes:
   zookeeper_db:
   kafka_db:
   docker_sock_db:
+
