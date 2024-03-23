@@ -81,7 +81,7 @@ services:
     ports:
       - "3000:80" #external:internal
     environment:
-      - EC2_IP: "ec2-44-232-43-222.us-west-2.compute.amazonaws.com"
+      - EC2_IP: ec2-44-232-43-222.us-west-2.compute.amazonaws.com
 
 volumes:
   my-db:
