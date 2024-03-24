@@ -16,7 +16,7 @@ services:
       - "9092:9092"
     hostname: kafka
     environment:
-      KAFKA_CREATE_TOPICS: "events:1:1,event2:1:1" # topic:partition:replicas
+      KAFKA_CREATE_TOPICS: "events:1:1,events2:1:1" # topic:partition:replicas
       KAFKA_ADVERTISED_HOST_NAME: ec2-44-232-43-222.us-west-2.compute.amazonaws.com # docker-machine ip
       KAFKA_LISTENERS: INSIDE://:29092,OUTSIDE://:9092
       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
@@ -30,6 +30,11 @@ services:
       - kafka_db:/kafka/kafka-logs
     depends_on:
       - zookeeper
+    healthcheck:
+      test: ["CMD", "kafka-topics.sh", "--list", "--zookeeper", "zookeeper:2181"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
 
   db:
     image: mysql:5.7
@@ -52,17 +57,18 @@ services:
     ports:
       - "8090:8090"
     depends_on:
-      - db
-      - kafka
-      - zookeeper
+      kafka:
+          condition: service_healthy
+
+      
 
   receiver:
     build: ../api-project/receiver
     ports: 
       - "8080:8080"
     depends_on:
-      - kafka
-      - zookeeper
+      kafka:
+          condition: service_healthy
   
   processing:
     build: ../api-project/processing
@@ -70,16 +76,16 @@ services:
     ports:
       - "8100:8100"
     depends_on:
-      - kafka
-      - zookeeper
+      kafka:
+          condition: service_healthy
 
   audit:
     build: ../api-project/audit
     ports:
       - "8110:8110"
     depends_on:
-      - kafka
-      - zookeeper
+      kafka:
+          condition: service_healthy
   
   dashboard:
     build: ../api-project/dashboard
@@ -91,8 +97,8 @@ services:
     ports:
       - "8120:8120"
     depends_on:
-     - kafka
-     - zookeeper
+     kafka:
+          condition: service_healthy
 
 volumes:
   my-db:
