@@ -81,6 +81,13 @@ services:
     ports:
       - "3000:80" #external:internal
 
+  event_logger:
+    build: ../api-project/event_logger
+    ports:
+      - "8120:8120"
+    depends_on:
+     - kafka
+
 volumes:
   my-db:
   zookeeper_db:
