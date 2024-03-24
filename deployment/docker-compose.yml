@@ -54,6 +54,7 @@ services:
     depends_on:
       - db
       - kafka
+      - zookeeper
 
   receiver:
     build: ../api-project/receiver
@@ -70,11 +71,15 @@ services:
       - "8100:8100"
     depends_on:
       - kafka
+      - zookeeper
 
   audit:
     build: ../api-project/audit
     ports:
       - "8110:8110"
+    depends_on:
+      - kafka
+      - zookeeper
   
   dashboard:
     build: ../api-project/dashboard
@@ -87,6 +92,7 @@ services:
       - "8120:8120"
     depends_on:
      - kafka
+     - zookeeper
 
 volumes:
   my-db:
