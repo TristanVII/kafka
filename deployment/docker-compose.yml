@@ -52,7 +52,7 @@ services:
       - my-db:/var/lib/mysql
 
   storage:
-    image: "tristan007/storage:latest"
+    image: tristan007/storage
     network_mode: "host"
     ports:
       - "8090:8090"
@@ -63,7 +63,7 @@ services:
       
 
   receiver:
-    image: "tristan007/receiver:latest"
+    image: tristan007/receiver
     ports: 
       - "8080:8080"
     depends_on:
@@ -71,7 +71,7 @@ services:
           condition: service_healthy
   
   processing:
-    image: "tristan007/processing:latest"
+    image: tristan007/processing
     network_mode: "host"
     ports:
       - "8100:8100"
