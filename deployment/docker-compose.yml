@@ -52,7 +52,7 @@ services:
       - my-db:/var/lib/mysql
 
   storage:
-    build: ../api-project/storage
+    image: "tristan007/storage"
     network_mode: "host"
     ports:
       - "8090:8090"
@@ -63,7 +63,7 @@ services:
       
 
   receiver:
-    build: ../api-project/receiver
+    image: "tristan007/receiver"
     ports: 
       - "8080:8080"
     depends_on:
@@ -71,7 +71,7 @@ services:
           condition: service_healthy
   
   processing:
-    build: ../api-project/processing
+    image: "tristan007/processing"
     network_mode: "host"
     ports:
       - "8100:8100"
@@ -80,7 +80,7 @@ services:
           condition: service_healthy
 
   audit:
-    build: ../api-project/audit
+    build: ../../api-project/audit
     ports:
       - "8110:8110"
     depends_on:
@@ -88,12 +88,12 @@ services:
           condition: service_healthy
   
   dashboard:
-    build: ../api-project/dashboard
+    build: ../../api-project/dashboard
     ports:
       - "3000:80" #external:internal
 
   event_logger:
-    build: ../api-project/event_logger
+    build: ../../api-project/event_logger
     ports:
       - "8120:8120"
     depends_on:
