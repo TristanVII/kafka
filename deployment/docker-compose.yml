@@ -78,8 +78,6 @@ services:
     depends_on:
       kafka:
           condition: service_healthy
-    volumes:
-      - audit_db:/var/db
 
   audit:
     build: ../../api-project/audit
@@ -101,6 +99,8 @@ services:
     depends_on:
      kafka:
           condition: service_healthy
+    volumes:
+      - audit_db:/var/db
 
 volumes:
   my-db:
