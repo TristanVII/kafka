@@ -98,7 +98,7 @@ services:
     environment:
       - TARGET_ENV=TEST
     volumes:
-      - /home/tristandavis888/config/audit:/config
+      - /home/tristandavis888/config/audit_log:/config
     depends_on:
       kafka:
           condition: service_healthy
