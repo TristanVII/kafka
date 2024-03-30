@@ -57,7 +57,7 @@ services:
     ports:
       - "8090:8090"
     environment:
-      - TARGET_ENV=test
+      - TARGET_ENV=TEST
     volumes:
       - /home/tristandavis888/config/storage:/config
     depends_on:
@@ -71,7 +71,7 @@ services:
     ports: 
       - "8080:8080"
     environment:
-      - TARGET_ENV=test
+      - TARGET_ENV=TEST
     volumes:
       - /home/tristandavis888/config/receiver:/config    
     depends_on:
@@ -84,7 +84,7 @@ services:
     ports:
       - "8100:8100"
     environment:
-      - TARGET_ENV=test
+      - TARGET_ENV=TEST
     volumes:
       - /home/tristandavis888/config/processing:/config
     depends_on:
