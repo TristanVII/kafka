@@ -96,7 +96,7 @@ services:
     ports:
       - "8110:8110"
     environment:
-      - TARGET_ENV=test
+      - TARGET_ENV=TEST
     volumes:
       - /home/tristandavis888/config/audit:/config
     depends_on:
