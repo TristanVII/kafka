@@ -60,6 +60,7 @@ services:
       - TARGET_ENV=TEST
     volumes:
       - /home/tristandavis888/config/storage:/config
+      - /home/tristandavis888/logs:/logs
     depends_on:
       kafka:
           condition: service_healthy
@@ -73,7 +74,8 @@ services:
     environment:
       - TARGET_ENV=TEST
     volumes:
-      - /home/tristandavis888/config/receiver:/config    
+      - /home/tristandavis888/config/receiver:/config
+      - /home/tristandavis888/logs:/logs 
     depends_on:
       kafka:
           condition: service_healthy
@@ -87,6 +89,7 @@ services:
       - TARGET_ENV=TEST
     volumes:
       - /home/tristandavis888/config/processing:/config
+      - /home/tristandavis888/logs:/logs
     depends_on:
       kafka:
           condition: service_healthy
@@ -99,6 +102,7 @@ services:
       - TARGET_ENV=TEST
     volumes:
       - /home/tristandavis888/config/audit_log:/config
+      - /home/tristandavis888/logs:/logs
     depends_on:
       kafka:
           condition: service_healthy
@@ -120,6 +124,7 @@ services:
     volumes:
       - audit_db:/var/db
       - /home/tristandavis888/config/event_logger:/config
+      - /home/tristandavis888/logs:/logs
 
 volumes:
   my-db:
