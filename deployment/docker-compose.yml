@@ -90,6 +90,7 @@ services:
     volumes:
       - /home/tristandavis888/config/processing:/config
       - /home/tristandavis888/logs:/logs
+      - processing_db:/data
     depends_on:
       kafka:
           condition: service_healthy
@@ -132,4 +133,5 @@ volumes:
   kafka_db:
   docker_sock_db:
   audit_db:
+  processing_db:
 
