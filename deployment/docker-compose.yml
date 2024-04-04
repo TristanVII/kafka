@@ -1,6 +1,26 @@
 version: '3.3'
 
 services:
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      # Connects the conf file of the container to the conf file in our folder
+      - /home/tristandavis888/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      # It will start up the nginx only when all api containers have started
+      - receiver
+      - storage
+      - processing
+      - audit_log
+      - dashboard-ui
+    ports:
+      # Connects the port 80 of the nginx container to localhost:80 or localhost
+      - "80:80"
+    networks:
+      - api.network
+
+
   zookeeper:
     image: wurstmeister/zookeeper
     ports:
@@ -55,7 +75,9 @@ services:
     image: tristan007/storage:storageImage
     network_mode: "host"
     ports:
-      - "8090:8090"
+      - "8090"
+    networks:
+      - "api.network"
     environment:
       - TARGET_ENV=TEST
     volumes:
@@ -70,7 +92,9 @@ services:
   receiver:
     image: tristan007/receiver:receiverImage
     ports: 
-      - "8080:8080"
+      - "8080"
+    networks:
+      - "api.network"
     environment:
       - TARGET_ENV=TEST
     volumes:
@@ -84,7 +108,9 @@ services:
     image: tristan007/processing:processingImage
     network_mode: "host"
     ports:
-      - "8100:8100"
+      - "8100"
+    networks:
+      - "api.network"
     environment:
       - TARGET_ENV=TEST
     volumes:
@@ -111,7 +137,9 @@ services:
   dashboard:
     build: ../../api-project/dashboard
     ports:
-      - "3000:80" #external:internal
+      - "3000" #external:internal
+    networks:
+      - "api.network"
 
   event_logger:
     build: ../../api-project/event_logger
@@ -135,3 +163,5 @@ volumes:
   audit_db:
   processing_db:
 
+networks:
+  api.network:
