@@ -12,8 +12,8 @@ services:
       - receiver
       - storage
       - processing
-      - audit_log
-      - dashboard-ui
+      - audit
+      - dashboard
     ports:
       # Connects the port 80 of the nginx container to localhost:80 or localhost
       - "80:80"
