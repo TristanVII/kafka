@@ -28,8 +28,6 @@ services:
     hostname: zookeeper
     volumes:
       - zookeeper_db:/opt/zookeeper-3.4.13/data
-    networks:
-      - "api.network"
 
   kafka:
     image: wurstmeister/kafka
@@ -37,8 +35,6 @@ services:
     ports:
       - "9092:9092"
     hostname: kafka
-    networks:
-      - "api.network"
     environment:
       KAFKA_CREATE_TOPICS: "events:1:1,events2:1:1" # topic:partition:replicas
       KAFKA_ADVERTISED_HOST_NAME: 34.118.240.191 # docker-machine ip
@@ -74,8 +70,6 @@ services:
       - '3306'
     volumes:
       - my-db:/var/lib/mysql
-    networks:
-      - "api.network" 
 
   storage:
     image: tristan007/storage:storageImage
