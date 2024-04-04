@@ -111,8 +111,6 @@ services:
   
   processing:
     image: tristan007/processing:processingImage
-    ports:
-      - "8100"
     networks:
       - "api.network"
     environment:
@@ -127,8 +125,6 @@ services:
 
   audit:
     build: ../../api-project/audit
-    ports:
-      - "8110"
     environment:
       - TARGET_ENV=TEST
     networks:
@@ -142,13 +138,13 @@ services:
   
   dashboard:
     build: ../../api-project/dashboard
+    ports:
+      - "3000"
     networks:
       - "api.network"
 
   event_logger:
     build: ../../api-project/event_logger
-    ports:
-      - "8120:8120"
     environment:
       - TARGET_ENV=test
     depends_on:
