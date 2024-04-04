@@ -142,8 +142,6 @@ services:
   
   dashboard:
     build: ../../api-project/dashboard
-    ports:
-      - "3000" #external:internal
     networks:
       - "api.network"
 
