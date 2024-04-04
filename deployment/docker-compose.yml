@@ -128,9 +128,11 @@ services:
   audit:
     build: ../../api-project/audit
     ports:
-      - "8110:8110"
+      - "8110"
     environment:
       - TARGET_ENV=TEST
+    networks:
+      - "api.network"
     volumes:
       - /home/tristandavis888/config/audit_log:/config
       - /home/tristandavis888/logs:/logs
@@ -158,6 +160,8 @@ services:
       - audit_db:/var/db
       - /home/tristandavis888/config/event_logger:/config
       - /home/tristandavis888/logs:/logs
+    networks:
+      - "api.network"
 
 volumes:
   my-db:
