@@ -73,7 +73,6 @@ services:
 
   storage:
     image: tristan007/storage:storageImage
-    network_mode: "host"
     ports:
       - "8090"
     networks:
@@ -106,7 +105,6 @@ services:
   
   processing:
     image: tristan007/processing:processingImage
-    network_mode: "host"
     ports:
       - "8100"
     networks:
