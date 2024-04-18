@@ -151,15 +151,16 @@ services:
     networks:
       - "api.network"
 
-  mock:
-    build: ../../api-project/prac
+  anomaly_detector:
+    build: ../../api-project/anomaly_detector
     environment:
       - TARGET_ENV=TEST
     depends_on:
      kafka:
           condition: service_healthy
     volumes:
-      - /home/tristandavis888/config/prac:/config
+      - anomaly_db:/var/db
+      - /home/tristandavis888/config/anomalies:/config
       - /home/tristandavis888/logs:/logs
     networks:
       - "api.network"
@@ -171,6 +172,7 @@ volumes:
   docker_sock_db:
   audit_db:
   processing_db:
+  anomaly_db:
 
 networks:
   api.network:
