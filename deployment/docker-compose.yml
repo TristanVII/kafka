@@ -151,6 +151,19 @@ services:
     networks:
       - "api.network"
 
+  mock:
+    build: ../../api-project/prac
+    environment:
+      - TARGET_ENV=test
+    depends_on:
+     kafka:
+          condition: service_healthy
+    volumes:
+      - /home/tristandavis888/config/prac:/config
+      - /home/tristandavis888/logs:/logs
+    networks:
+      - "api.network"
+
 volumes:
   my-db:
   zookeeper_db:
