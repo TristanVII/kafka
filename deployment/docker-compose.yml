@@ -140,7 +140,7 @@ services:
   event_logger:
     build: ../../api-project/event_logger
     environment:
-      - TARGET_ENV=test
+      - TARGET_ENV=TEST
     depends_on:
      kafka:
           condition: service_healthy
@@ -154,7 +154,7 @@ services:
   mock:
     build: ../../api-project/prac
     environment:
-      - TARGET_ENV=test
+      - TARGET_ENV=TEST
     depends_on:
      kafka:
           condition: service_healthy
